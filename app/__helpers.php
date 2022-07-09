@@ -30,6 +30,11 @@ function baseUrl()
         return BASE_URL;
 }
 
+function url($path = null)
+{
+    return baseUrl() . '/' . $path;
+}
+
 function asset($file = null)
 {
     return baseUrl() . '/assets/' . $file;

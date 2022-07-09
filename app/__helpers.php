@@ -35,6 +35,11 @@ function url($path = null)
     return baseUrl() . '/' . $path;
 }
 
+function route($path)
+{
+    return url('?page=' . $path);
+}
+
 function asset($file = null)
 {
     return baseUrl() . '/assets/' . $file;

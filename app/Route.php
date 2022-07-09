@@ -11,6 +11,7 @@ class Route
     public string $type;
     public string $method;
     public string $page;
+    public array $middlewares = [];
 
     public static function view($path, $page) : Route
     {
@@ -24,7 +25,7 @@ class Route
 
     public function match() : bool
     {
-        $currentPath = request()->get('page', '/');
+        $currentPath = request()->get('page', '');
         $requestMethod = request()->method();
 
         if ($currentPath !== $this->path) 

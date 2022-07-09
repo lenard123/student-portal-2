@@ -36,10 +36,10 @@ class Route
         return true;
     }
 
-    public function response()
+    public function response() : Response
     {
         if ($this->type === static::TYPE_VIEW) {
-            include pages_path($this->page);
+            return Response::view($this->page);
         }
     }
 }

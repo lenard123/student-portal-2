@@ -2,6 +2,7 @@
 
 use App\App;
 use App\Request;
+use App\View;
 
 function app() : App
 {
@@ -11,6 +12,11 @@ function app() : App
 function request() : Request
 {
     return app()->request;
+}
+
+function view() : View
+{
+    return app()->view;
 }
 
 function pages_path($file)
@@ -27,4 +33,13 @@ function baseUrl()
 function asset($file = null)
 {
     return baseUrl() . '/assets/' . $file;
+}
+
+function config($key, $default = null)
+{
+    $config = app()->configurations;
+    if (array_key_exists($key, $config)) {
+        return $config[$key];
+    }
+    return $default;
 }

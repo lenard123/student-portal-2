@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="<?= asset('main.css') ?>">
 </head>
 <body>
-    Hello world
+    <?= view()->components('navbar')->render() ?>
+    home
 </body>
 </html>

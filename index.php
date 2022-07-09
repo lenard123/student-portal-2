@@ -9,4 +9,5 @@ require __DIR__.'/app/__helpers.php';
 
 $routes = require('routes.php');
 $app = App\App::make($routes);
+$app->boot();
 $app->render();

@@ -8,11 +8,6 @@ class Request
     const GET = 'GET';
     const POST = 'POST';
 
-    public static function make()
-    {
-        return new Request();
-    }
-
     public function get(string $key, $default = null)
     {
         if (array_key_exists($key, $_GET))

@@ -6,15 +6,14 @@ class Router
 {
     private $not_found_page = '404.php';
 
-    // private $home_page = 'home.php';
-
     public function __construct(private $routes = [])
     {}
 
     public function handle()
     {
         $route = $this->findRoute();
-        $route->response();
+        $response = $route->response();
+        $response->render();
     }
 
     private function findRoute() : Route

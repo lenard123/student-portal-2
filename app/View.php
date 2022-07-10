@@ -11,6 +11,7 @@ class View
 
     private static array $jsLibrary = [
         'alpine' => '<script src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js" defer></script>',
+        'alpine/collapse' => '<script src="https://unpkg.com/@alpinejs/collapse@3.10.2/dist/cdn.min.js" defer></script>',
         'axios' => '<script src="https://unpkg.com/axios@0.27.2/dist/axios.min.js"></script>',
     ];
 

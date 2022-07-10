@@ -1,15 +1,16 @@
 
-const login = async function (credential) {
-    const { data } = await axios.post('?page=api/login', credential)
-    return data
-}
-
 document.addEventListener('alpine:init', () => {
+
+    const login = async function (credential) {
+        const { data } = await axios.post('?page=api/login', credential)
+        return data
+    }
+
     Alpine.data('loginPage', () => ({
 
         email: '',
         password: '',
-        
+
         login: useAsync(login),
 
         handleSubmit() {
@@ -20,7 +21,7 @@ document.addEventListener('alpine:init', () => {
         },
 
         init() {
-            this.login.onSuccess = function(data) {
+            this.login.onSuccess = function (data) {
                 window.location.href = '?page=' + data.role
             }
         }

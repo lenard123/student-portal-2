@@ -1,11 +1,16 @@
 <?php
 
 use App\Controllers\Api\AuthController;
+use App\Controllers\TeacherController;
 use App\Route;
 
 return [
     Route::view('', 'home'),
     Route::view('login', 'login'),
+    Route::view('register', 'register'),
+
+    //TEACHER ROUTES
+    Route::get('teacher', [TeacherController::class, 'index'])->middleware('auth:teacher'),
 
 
     //ADMIN ROUTES
@@ -13,6 +18,7 @@ return [
         ->middleware('auth:admin'),
 
     //API ROUTES
+    Route::post('api/register', [AuthController::class, 'register']),
     Route::post('api/login', [AuthController::class, 'login']),
     Route::post('api/logout', [AuthController::class, 'logout'])
         ->middleware('auth'),

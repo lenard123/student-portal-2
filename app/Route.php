@@ -82,7 +82,8 @@ class Route
             switch ($this->type)
             {
                 case static::TYPE_VIEW:
-                    return Response::view($this->page);
+                    $template = view()->page($this->page);
+                    return Response::view($template);
                 
                 case static::TYPE_CALLABLE:
                     return Response::call($this->action);

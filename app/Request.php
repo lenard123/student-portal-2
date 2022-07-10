@@ -80,4 +80,9 @@ class Request
 
         }
     }
+
+    public function __get($name)
+    {
+        return $this->request($name);
+    }
 }

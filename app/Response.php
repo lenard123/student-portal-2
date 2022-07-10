@@ -17,7 +17,7 @@ class Response
     private $data = null;
     private Template $view;
     private array $headers = [];
-    private int $status;
+    public int $status;
 
     public function __construct(int $status = 200)
     {
@@ -68,7 +68,7 @@ class Response
     {
         $response = new Response(200);
         $response->type = static::TYPE_VIEW;
-        $response->view = view()->page($template);
+        $response->view = $template;
         return $response;
     }
 
@@ -119,7 +119,7 @@ class Response
             return $result;
         }
 
-        if (is_subclass_of($result, Template::class)) {
+        if (is_a($result, Template::class)) {
             return Response::view($result);
         }
 

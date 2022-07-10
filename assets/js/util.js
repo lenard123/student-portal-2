@@ -21,6 +21,7 @@
                     this.onSuccess(this.data)
                 } catch (error) {
                     this.errors = transformError(error)
+                    this.onError(this.errors)
                 } finally {
                     this.isLoading = false
                 }
@@ -36,7 +37,21 @@
                 return this.error(key) !== undefined
             },
 
-            onSuccess: (data) => {}
+            onSuccess: (data) => {},
+            onError: (error) => {},
         }
     }
+
+    //Components
+    document.addEventListener('alpine:init', () => {
+
+        Alpine.data('toggler', (open = false) => ({
+            open,
+            toggle() {
+                this.open = !this.open
+            }
+        }))
+
+    })
+
 })()

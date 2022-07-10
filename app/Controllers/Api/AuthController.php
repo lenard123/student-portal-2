@@ -4,9 +4,9 @@ namespace App\Controllers\Api;
 
 use App\Controllers\BaseController;
 
-class LoginController extends BaseController
+class AuthController extends BaseController
 {
-    public function __invoke()
+    public function login()
     {
         $this->validate([
             'email' => 'required|email',
@@ -15,8 +15,16 @@ class LoginController extends BaseController
 
         $credential = request()->only('email', 'password');
 
-        // dd($credential);
-
         return auth()->login($credential);
+    }
+
+    public function logout()
+    {
+        auth()->logout();
+    }
+
+    public function currentUser()
+    {
+        return auth()->user();
     }
 }

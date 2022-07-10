@@ -1,7 +1,9 @@
 <?php
 
 use App\App;
+use App\Auth;
 use App\Request;
+use App\Session;
 use App\View;
 
 function app() : App
@@ -12,6 +14,16 @@ function app() : App
 function request() : Request
 {
     return app()->request;
+}
+
+function auth() : Auth
+{
+    return app()->auth;
+}
+
+function session() : Session
+{
+    return app()->session;
 }
 
 function view() : View

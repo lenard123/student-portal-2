@@ -14,6 +14,7 @@ class Router
         $route = $this->findRoute();
         $response = $route->response();
         $response->render();
+        exit();
     }
 
     private function findRoute() : Route

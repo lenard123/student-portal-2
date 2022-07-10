@@ -10,6 +10,7 @@
     <?= view()->css('main') ?>
     <?= view()->lib('axios') ?>
     <?= view()->lib('alpine') ?>
+    <?= view()->js('util') ?>
     <?= view()->js('login') ?>
 </head>
 
@@ -22,20 +23,23 @@
 
                 <div class="card-title">Login to Student Portal</div>
 
-                <form method="POST">
+                <form @submit.prevent="handleSubmit" method="POST">
 
                     <div class="form-control">
                         <label class="label">
                             <span class="label-text">Email</span>
                         </label>
-                        <input class="input input-bordered" required type="email" name="email">
+                        <input x-model="email" :class="{'input-error': login.hasError('email')}" class="input input-bordered" required type="email" name="email">
+                        <label class="label" x-show="login.hasError('email')">
+                            <span class="label-text-alt text-error" x-text="login.error('email')"></span>
+                        </label>
                     </div>
 
                     <div class="form-control">
                         <label class="label">
                             <span class="label-text">Password</span>
                         </label>
-                        <input class="input input-bordered" required type="password" name="password">
+                        <input x-model="password" class="input input-bordered" required type="password" name="password">
                     </div>
 
                     <div class="form-control">
@@ -46,7 +50,7 @@
                     </div>
 
                     <div class="form-control mt-4">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" :class="{'loading': login.isLoading }" class="btn btn-primary">Submit</button>
                     </div>
 
                 </form>

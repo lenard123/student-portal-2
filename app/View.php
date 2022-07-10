@@ -17,16 +17,24 @@ class View
     public function __construct()
     {
         $this->engine = new Engine(ROOT_DIR . '/templates');   
+        $this->engine->addFolder('layouts', ROOT_DIR .'/templates/layouts');
+        $this->engine->addFolder('components', ROOT_DIR .'/templates/components');
+        $this->engine->addFolder('pages', ROOT_DIR .'/templates/pages');
     }
 
     public function page($template) : Template
     {
-        return $this->engine->make('pages/' . $template);
+        return $this->engine->make('pages::' . $template);
+    }
+
+    public function layout($template) : Template
+    {
+        return $this->engine->make('layouts::' . $template);
     }
 
     public function components($template) : Template
     {
-        return $this->engine->make('components/' . $template);
+        return $this->engine->make('components::' . $template);
     }
 
     public function lib($key)

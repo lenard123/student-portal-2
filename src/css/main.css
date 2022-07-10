@@ -37,3 +37,11 @@ div.admin-menu > a.active {
 .title {
   @apply font-bold text-xl sm:text-2xl md:text-3xl font-inter;
 }
+
+.admin .nav-link {
+  @apply transition-all text-sm flex hover:bg-[#181827] text-[#a2a3b7] hover:text-white py-2;
+}
+
+.admin .nav-link .icon {
+  @apply inline-flex justify-center items-center w-12 h-5 flex-none ;
+}

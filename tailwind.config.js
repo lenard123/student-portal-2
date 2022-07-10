@@ -28,7 +28,7 @@ module.exports = {
             {
                 light: {
                     ...daisyUITheme["[data-theme=light]"],
-                    primary: colors.blue['500'],
+                    primary: colors.green['500'],
                 }
             }
         ]

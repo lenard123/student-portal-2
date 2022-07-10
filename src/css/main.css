@@ -11,14 +11,14 @@
 }
 
 body {
-    @apply min-h-screen;
+    @apply min-h-screen bg-slate-100;
 }
 
 .navbar {
     @apply sm:px-8;
 }
 
-[v-cloak] {
+[x-cloak] {
   display: none;
 }
 

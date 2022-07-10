@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="<?= asset('img/logo.png') ?>" type="image/x-icon">
     <title>Home</title>
-    <link rel="stylesheet" href="<?= asset('main.css') ?>">
+    <?= view()->css('main') ?>
 </head>
 <body>
     <?= view()->components('navbar')->render() ?>

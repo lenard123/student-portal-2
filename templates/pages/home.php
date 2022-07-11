@@ -9,7 +9,7 @@
     <?= view()->css('main') ?>
 </head>
 <body>
-    <?= view()->layout('navbar')->render() ?>
+    <?= view()->components('navbar')->render() ?>
 
     <div class="bg-[#CFEBEB] py-24">
         <h1 style="text-shadow: 1px 1px 2px black;" class="text-5xl text-white font-inter font-black text-center">The Lord's Wisdom Academy of Caloocan Inc.</h1>

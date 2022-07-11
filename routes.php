@@ -11,6 +11,7 @@ return [
 
     //TEACHER ROUTES
     Route::get('teacher', [TeacherController::class, 'index'])->middleware('auth:teacher'),
+    Route::view('teacher/classes/create', 'teacher/classes/create'),
 
 
     //ADMIN ROUTES

@@ -8,6 +8,7 @@ use League\Plates\Template\Template;
 class View
 {
     private Engine $engine;
+    public $stack = [];
 
     private static array $jsLibrary = [
         'alpine' => '<script src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js" defer></script>',
@@ -23,14 +24,26 @@ class View
         $this->engine->addFolder('pages', ROOT_DIR .'/templates/pages');
     }
 
-    public function page($template) : Template
+    public function start($name, $data = [])
     {
-        return $this->engine->make('pages::' . $template);
+        ob_start();
+        array_push($this->stack, compact('name', 'data'));
     }
 
-    public function layout($template) : Template
+    public function end() 
     {
-        return $this->engine->make('layouts::' . $template);
+        $section = array_pop($this->stack);
+        $name = $section['name'];
+        $data = $section['data'];
+        $data['content'] = ob_get_clean();
+        echo $this->engine->make($name)->render($data);
+    }
+
+    public function page($template, $data = []) : Template
+    {
+        $template =  $this->engine->make('pages::' . $template);
+        $template->data($data);
+        return $template;
     }
 
     public function components($template) : Template

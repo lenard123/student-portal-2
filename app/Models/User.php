@@ -19,4 +19,9 @@ class User extends Model
     {
         $this->attributes['password'] = password_hash($password, PASSWORD_DEFAULT);
     }
+
+    public function classes()
+    {
+        return $this->hasMany(Classes::class, 'teacher_id');
+    }
 }

@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <?= view()->layout('navbar')->render() ?>
+    <?= view()->components('navbar')->render() ?>
 
     <div x-data="register" class="container py-8" id="login-page">
         <div class="card rounded-none mx-auto max-w-md bg-base-100">

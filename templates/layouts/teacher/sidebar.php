@@ -1,5 +1,5 @@
 
-<aside class="h-screen flex-shrink-0 bg-[#141423] w-[260px] shadow">
+<aside class="hidden lg:block h-screen flex-shrink-0 bg-[#141423] w-[260px] shadow">
 
     <div class="h-16 bg-[#1A1A27] text-white shadow flex items-center gap-4 px-4">
         <img src="<?= asset('img/logo.png') ?>" class="h-8" />

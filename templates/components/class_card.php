@@ -2,7 +2,7 @@
 <div class="border border-gray-300 rounded">
     <img class="h-32 object-cover" src="<?= $class->cover ?>" />
     <div class="p-2">
-        <h5 class="font-bold"><?= $class->name ?></h5>
+        <a href="<?= route('teacher/classes/view', $class) ?>" class="font-bold"><?= $class->name ?></a>
         <h6><?= $class->section ?></h6>
     </div>
     <div class="p-2 flex justify-end">

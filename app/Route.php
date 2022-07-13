@@ -17,7 +17,7 @@ class Route
     public array $middlewares = [];
     public $action;
 
-    public static function view($path, $page) : Route
+    public static function view($path, $page): Route
     {
         $route = new Route();
         $route->path = $path;
@@ -27,7 +27,7 @@ class Route
         return $route;
     }
 
-    public static function post($path, $action) : Route
+    public static function post($path, $action): Route
     {
         $route = new Route();
         $route->path = $path;
@@ -37,7 +37,7 @@ class Route
         return $route;
     }
 
-    public static function get($path, $action) : Route
+    public static function get($path, $action): Route
     {
         $route = new Route();
         $route->path = $path;
@@ -48,15 +48,15 @@ class Route
     }
 
 
-    public function match() : bool
+    public function match(): bool
     {
         $currentPath = request()->get('page', '');
         $requestMethod = request()->method();
 
-        if ($currentPath !== $this->path) 
+        if ($currentPath !== $this->path)
             return false;
 
-        if ($requestMethod !== $this->method) 
+        if ($requestMethod !== $this->method)
             return false;
 
         return true;
@@ -73,36 +73,17 @@ class Route
         return $this;
     }
 
-    public function response() : Response
+    public function response(): Response
     {
-        try {
+        Middleware::handle($this->middlewares);
 
-            Middleware::handle($this->middlewares);
+        switch ($this->type) {
+            case static::TYPE_VIEW:
+                $template = view()->page($this->page);
+                return Response::view($template);
 
-            switch ($this->type)
-            {
-                case static::TYPE_VIEW:
-                    $template = view()->page($this->page);
-                    return Response::view($template);
-                
-                case static::TYPE_CALLABLE:
-                    return Response::call($this->action);
-            }
-
-        } catch (ResponseException $exception) {
-            return $exception->handler();
-        } catch (\Throwable $ex) {
-
-            $response = Response::make([
-                'message' => $ex->getMessage(),
-                'stacktrace' => $ex->getTrace(),
-                'file' => $ex->getFile(),
-                'code' => $ex->getCode(),
-                'line' => $ex->getLine(),
-            ]);
-            $response->status = 500;
-            return $response;
-
+            case static::TYPE_CALLABLE:
+                return Response::call($this->action);
         }
-    }    
+    }
 }

@@ -22,6 +22,11 @@ class Classes extends Model
         return asset($this->attributes['cover']);
     }
 
+    public function lessons()
+    {
+        return $this->hasMany(Lesson::class, 'class_id')->latest();
+    }
+
     public function teacher()
     {
         return $this->belongsTo(User::class, 'teacher_id');

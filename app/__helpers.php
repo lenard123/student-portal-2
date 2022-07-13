@@ -2,6 +2,7 @@
 
 use App\App;
 use App\Auth;
+use App\Middlewares\BindModel;
 use App\Request;
 use App\Session;
 use App\View;
@@ -38,8 +39,7 @@ function pages_path($file)
 
 function baseUrl()
 {
-    if (defined('BASE_URL'))
-        return BASE_URL;
+    return config('BASE_URL');
 }
 
 function url($path = null)
@@ -47,9 +47,15 @@ function url($path = null)
     return baseUrl() . '/' . $path;
 }
 
-function route($path)
+function route($path, ...$params)
 {
-    return url('?page=' . $path);
+    $query = '';
+    foreach($params as $param) {
+        if ($key = BindModel::getKey($param)) {
+            $query .= "&$key=" . $param->getKey();
+        }
+    }
+    return url('?page=' . $path . $query);
 }
 
 function asset($file = null)

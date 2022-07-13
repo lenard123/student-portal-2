@@ -6,6 +6,7 @@ class Middleware
 {
     public static $middlewares = [
         'auth' => Middlewares\Authenticate::class,
+        'model' => Middlewares\BindModel::class,
     ];
 
     public static function handle($middlewares)

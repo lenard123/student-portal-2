@@ -46,5 +46,6 @@ class App
     public function render()
     {
         $this->router->handle();
+        exit();
     }
 }

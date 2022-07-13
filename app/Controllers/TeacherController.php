@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-// use Classes;
+use App\Models\GradeLevel;
 
 class TeacherController extends BaseController
 {
@@ -10,5 +10,11 @@ class TeacherController extends BaseController
     {
         $classes = auth()->user()->classes;
         return view()->page('teacher/classes/index', compact('classes'));
+    }
+
+    public function showCreatePage()
+    {
+        $levels = GradeLevel::all();
+        return view()->page('teacher/classes/create', compact('levels'));
     }
 }

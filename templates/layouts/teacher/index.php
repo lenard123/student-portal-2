@@ -10,6 +10,7 @@
     <?= view()->lib('alpine') ?>
     <?= view()->js('util') ?>
     <?= view()->css('main') ?>
+    <?= $this->section('head') ?>
 </head>
 <body class="flex teacher">
 

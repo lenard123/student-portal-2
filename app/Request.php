@@ -7,6 +7,7 @@ class Request
 
     const GET = 'GET';
     const POST = 'POST';
+    const PUT = 'PUT';
 
     public function get(string $key = null, $default = null)
     {

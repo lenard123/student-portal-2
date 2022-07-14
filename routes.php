@@ -20,7 +20,12 @@ return [
     Route::get('teacher/classes/create-lesson', [TeacherController::class, 'showCreateLessonPage'])
         ->middleware('auth:teacher')
         ->middleware('model:class'),
-
+    Route::get('teacher/classes/view-lesson', [TeacherController::class, 'showLessonPage'])
+        ->middleware('auth:teacher')
+        ->middleware('model:lesson'),
+    Route::get('teacher/classes/edit-lesson', [TeacherController::class, 'showEditLessonPage'])
+        ->middleware('auth:teacher')
+        ->middleware('model:lesson'),
 
     //ADMIN ROUTES
     Route::view('admin', 'admin/dashboard')
@@ -41,4 +46,7 @@ return [
     Route::post('api/lesson', [LessonController::class, 'create'])
         ->middleware('auth:teacher')
         ->middleware('model:class'),
+    Route::put('api/lesson', [LessonController::class, 'edit'])
+        ->middleware('auth:teacher')
+        ->middleware('model:lesson'),
 ];

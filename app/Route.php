@@ -37,6 +37,16 @@ class Route
         return $route;
     }
 
+    public static function put($path, $action): Route
+    {
+        $route = new Route();
+        $route->path = $path;
+        $route->type = static::TYPE_CALLABLE;
+        $route->method = Request::PUT;
+        $route->action = $action;
+        return $route;
+    }
+
     public static function get($path, $action): Route
     {
         $route = new Route();

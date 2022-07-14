@@ -16,6 +16,9 @@ document.addEventListener('alpine:init', () => {
         createLesson: useAsync(createLessonApi),
 
         handleSubmit: function () {
+            if (this.createLesson.isLoading)
+                return;
+
             const title = this.data.title
             const description = this.$refs.description.value
             this.createLesson.execute(_class.id, {title, description})

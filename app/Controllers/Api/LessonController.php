@@ -23,4 +23,19 @@ class LessonController extends BaseController
 
         return $lesson;
     }
+
+    public function edit()
+    {
+        $this->validate([
+            'title' => 'required',
+            'description' => 'required',
+        ]);
+
+        $lesson = Lesson::current();
+        $lesson->title = request()->title;
+        $lesson->description = request()->description;
+        $lesson->update();
+
+        return $lesson;
+    }
 }

@@ -47,3 +47,51 @@ div.admin-menu > a.active {
 .teacher .nav-link .icon {
   @apply inline-flex justify-center items-center w-12 h-5 flex-none ;
 }
+
+
+.Prose {
+  @apply text-gray-600;
+}
+
+.Prose  blockquote {
+  @apply py-1 border-l-2 border-gray-300 pl-3;
+}
+
+.Prose h1 {
+  @apply text-3xl font-bold text-gray-900;
+}
+
+.Prose h2 {
+  @apply text-2xl font-bold text-gray-800;
+}
+
+.Prose h3 {
+  @apply text-xl font-semibold text-gray-700;
+}
+
+.Prose h4 {
+  @apply text-lg font-medium text-gray-600;
+}
+
+.Prose ul > li {
+  @apply list-disc ml-3;
+}
+
+.Prose ol > li {
+  @apply list-decimal ml-3;
+}
+
+.Prose pre {
+    background: #0D0D0D;
+    color: #FFF;
+    font-family: 'JetBrainsMono', monospace;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+  }
+
+.Prose pre code {
+  color: inherit;
+  padding: 0;
+  background: none;
+  font-size: 0.8rem;
+}

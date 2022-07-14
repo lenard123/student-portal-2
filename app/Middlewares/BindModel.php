@@ -4,6 +4,7 @@ namespace App\Middlewares;
 
 use App\Exceptions\NotFoundException;
 use App\Models\Classes;
+use App\Models\Lesson;
 use App\Models\Model;
 
 class BindModel
@@ -11,6 +12,7 @@ class BindModel
 
     private static $modelMap = [
         'class' => Classes::class,
+        'lesson' => Lesson::class,
     ];
 
     public function handle($modelName)

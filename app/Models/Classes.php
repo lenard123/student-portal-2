@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\ClassFileManager;
+
 class Classes extends Model
 {
     protected $table = 'classes';
@@ -42,6 +44,16 @@ class Classes extends Model
         return $this->belongsToMany(User::class, 'class_students','class_id', 'student_id');    
     }
 
+    public function getFilesAttribute()
+    {
+        return $this->fileManager->getFiles();
+    }
+    
+    public function getFileManagerAttribute() : ClassFileManager
+    {
+        return new ClassFileManager($this);
+    }
+
     public static function generateCode()
     {
         return strtoupper(generateRandomString(4) . '-' . generateRandomString(4));
@@ -53,4 +65,5 @@ class Classes extends Model
         $i = rand(0, count($covers) - 1);
         return $covers[$i];
     }
+    
 }

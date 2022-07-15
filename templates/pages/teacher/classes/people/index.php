@@ -40,7 +40,7 @@
                                         </div>
                                         <div>
                                             <div class="font-bold" x-text="student.fullname"></div>
-                                            <div class="text-sm opacity-50">United States</div>
+                                            <div class="text-sm opacity-50" x-text="student.email"></div>
                                         </div>
                                     </div>
                                 </td>

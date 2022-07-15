@@ -87,4 +87,15 @@ class TeacherController extends BaseController
             compact('class', 'students')
         );
     }
+
+    #teacher/classes/files
+    public function showFilesPage()
+    {
+        $class = Classes::current();
+        $files = $class->files;
+        return view()->page(
+            'teacher/classes/files',
+            compact('class', 'files')
+        );
+    }
 }

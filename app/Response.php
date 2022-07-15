@@ -12,6 +12,7 @@ class Response
     const TYPE_JSON = 'json';
     const TYPE_NULL = 'null';
     const TYPE_REDIRECT = 'redirect';
+    const TYPE_DOWNLOAD = 'download';
 
     private string $type = self::TYPE_NULL;
     private $data = null;
@@ -36,6 +37,10 @@ class Response
                 return $this->renderJson();
 
             case static::TYPE_REDIRECT:
+                return;
+
+            case static::TYPE_DOWNLOAD:
+                echo $this->data;
                 return;
         }
     }
@@ -125,6 +130,15 @@ class Response
 
         if (is_null($result)) {
             return Response::noContent();
+        }
+
+        if (is_a($result, ClassFile::class)) {
+            $response = new Response();
+            $response->type = static::TYPE_DOWNLOAD;
+            $response->data = $result->content();
+            $response->addHeader('Content-Type: application/octet-stream');
+            $response->addHeader('Content-Disposition: attachment; filename="' . $result->name . '"');
+            return $response;
         }
 
         if (is_subclass_of($result, ResponseException::class)) {

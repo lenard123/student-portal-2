@@ -3,7 +3,9 @@
 namespace App\Controllers\Api;
 
 use App\Controllers\BaseController;
+use App\Exceptions\NotFoundException;
 use App\Models\Classes;
+use Exception;
 
 class ClassController extends BaseController
 {
@@ -23,5 +25,18 @@ class ClassController extends BaseController
         $new_class->save();
 
         return $new_class;
+    }
+
+    public function download()
+    {
+        $class = Classes::current();
+        $fileManager = $class->fileManager;
+        $fileName = request()->get('file');
+
+        try {
+            return $fileManager->getFile($fileName);
+        } catch (Exception $ex){
+            throw new NotFoundException();            
+        }
     }
 }

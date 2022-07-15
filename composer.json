@@ -22,6 +22,7 @@
         "spatie/ignition": "^1.3",
         "league/plates": "^3.4",
         "illuminate/database": "^9.19",
-        "rakit/validation": "^1.4"
+        "rakit/validation": "^1.4",
+        "league/flysystem": "^3.1"
     }
 }

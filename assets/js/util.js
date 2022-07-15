@@ -7,9 +7,10 @@
         return error
     }
 
-    window.route = function (path, data = {}) {
-        const query = Object.keys(data).map(key => `&${key}=${data[key]}`).join('&');
-        return `?page=${path}${query}`
+    window.route = function (page, data = {}) {
+        data = {page, ...data }
+        const query = Object.keys(data).map(key => `${key}=${data[key]}`).join('&');
+        return `?${query}`
     }
 
     window.api = function (path, data = {}) {
@@ -50,6 +51,11 @@
             onError: (error) => {},
         }
     }
+
+    window.humanFileSize = (size) => {
+        var i = Math.floor( Math.log(size) / Math.log(1024) );
+        return ( size / Math.pow(1024, i) ).toFixed(2) * 1  + ['B', 'kB', 'MB', 'GB', 'TB'][i];
+    };
 
     //Components
     document.addEventListener('alpine:init', () => {

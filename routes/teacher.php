@@ -42,4 +42,8 @@ return [
     Route::get('teacher/classes/students', [TeacherController::class, 'showStudentsPage'])
         ->middleware('auth:teacher')
         ->middleware('model:class'),
+
+    Route::get('teacher/classes/files', [TeacherController::class, 'showFilesPage'])
+        ->middleware('auth:teacher')
+        ->middleware('model:class'),
 ];

@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 * {
   scroll-behavior: smooth;
 }
@@ -16,6 +12,14 @@ body {
 
 .navbar {
     @apply sm:px-8;
+}
+
+table tbody {
+  @apply text-sm;
+}
+
+table td {
+  vertical-align: top;
 }
 
 [x-cloak] {
@@ -94,4 +98,9 @@ div.admin-menu > a.active {
   padding: 0;
   background: none;
   font-size: 0.8rem;
+}
+
+
+.content-container {
+  @apply p-8;
 }

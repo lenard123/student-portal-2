@@ -10,8 +10,6 @@ class Auth
 {
     const SESSION_KEY = 'current_user';
 
-    private ?User $user;
-
     public function login($credential)
     {
         $user = User::where('email', $credential['email'])->first();
@@ -49,11 +47,11 @@ class Auth
         if ($user->role !== $role)
             throw new UnauthenticatedException();
 
-        $this->user = $user;
+        $user->setAsCurrent();
     }
 
     public function user()
     {
-        return $this->user;
+        return User::current();
     }
 }

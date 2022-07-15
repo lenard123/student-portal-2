@@ -30,4 +30,12 @@ return [
     Route::get('teacher/classes/works', [TeacherController::class, 'showClassWorksPage'])
         ->middleware('auth:teacher')
         ->middleware('model:class'),
+
+    Route::get('teacher/classes/create-work', [TeacherController::class, 'showCreateWorkPage'])
+        ->middleware('auth:teacher')
+        ->middleware('model:class'),
+
+    Route::get('teacher/classes/view-work', [TeacherController::class, 'showClassWorkPage'])
+        ->middleware('auth:teacher')
+        ->middleware('model:work')
 ];

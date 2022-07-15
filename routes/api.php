@@ -3,6 +3,7 @@
 use App\Controllers\Api\AuthController;
 use App\Controllers\Api\ClassController;
 use App\Controllers\Api\LessonController;
+use App\Controllers\Api\WorkController;
 use App\Route;
 
 return [
@@ -27,4 +28,9 @@ return [
     Route::delete('api/lesson', [LessonController::class, 'destroy'])
         ->middleware('auth:teacher')
         ->middleware('model:lesson'),
+
+
+    Route::post('api/work', [WorkController::class, 'create'])
+        ->middleware('auth:teacher')
+        ->middleware('model:class'),
 ];

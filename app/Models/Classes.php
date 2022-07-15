@@ -27,6 +27,11 @@ class Classes extends Model
         return $this->hasMany(Lesson::class, 'class_id')->latest();
     }
 
+    public function works()
+    {
+        return $this->hasMany(ClassWork::class, 'class_id')->latest();
+    }
+
     public function teacher()
     {
         return $this->belongsTo(User::class, 'teacher_id');

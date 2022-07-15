@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Carbon\Carbon;
+
 class Request
 {
 
@@ -24,6 +26,12 @@ class Request
     public function all()
     {
         return $this->get() + $this->post();
+    }
+
+    public function date($key)
+    {
+        $date = $this->request($key);
+        return Carbon::make($date);
     }
 
     public function post(string $key = null, $default = null)

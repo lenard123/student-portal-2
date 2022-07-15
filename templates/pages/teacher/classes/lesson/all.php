@@ -35,12 +35,12 @@
                     <!-- head -->
                     <thead>
                         <tr>
-                            <th class="w-20">#</th>
+                            <th class="w-20">Posted</th>
                             <th>Title</th>
                             <th class="w-20">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-sm">
                         <?php if ($class->lessons->isEmpty()) : ?>
                             <tr>
                                 <td colspan="3">No Lessons added yet</td>
@@ -49,7 +49,7 @@
                             <?php foreach ($class->lessons as $lesson) : ?>
                                 <tr class="relative" x-data="lessonRow(<?= $lesson->id ?>)" x-show="!deleted">
                                     <td><?= $lesson->created_at->diffForHumans() ?></td>
-                                    <td><?= $lesson->title ?></td>
+                                    <th><?= $lesson->title ?></th>
                                     <td>
                                         <div class="flex gap-2">
 

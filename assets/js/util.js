@@ -7,6 +7,15 @@
         return error
     }
 
+    window.route = function (path, data = {}) {
+        const query = Object.keys(data).map(key => `&${key}=${data[key]}`).join('&');
+        return `?page=${path}${query}`
+    }
+
+    window.api = function (path, data = {}) {
+        return window.route (`api/${path}`, data)
+    }
+
     window.useAsync = function (callback) {
         return {
     

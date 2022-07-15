@@ -38,4 +38,9 @@ class LessonController extends BaseController
 
         return $lesson;
     }
+
+    public function destroy()
+    {
+        return Lesson::current()->delete();
+    }
 }

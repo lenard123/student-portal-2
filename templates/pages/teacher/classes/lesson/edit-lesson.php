@@ -4,6 +4,7 @@
     <?= view()->lib('tinymce') ?>
     <?= view()->js('util') ?>
     <?= view()->js('editLesson') ?>
+    <?= view()->data('lesson', $lesson) ?>   
 <?php $this->end() ?>
 
 <div class="p-8">
@@ -23,7 +24,7 @@
             <h4 class="uppercase">Edit Lesson</h4>
         </div>
         <div class="p-4">
-            <form @submit.prevent="handleSubmit" class="max-w-2xl mx-auto" x-data='editLesson(<?= json_encode($lesson) ?>)'>
+            <form @submit.prevent="handleSubmit" class="max-w-2xl mx-auto" x-data='editLesson(window.lesson)'>
 
                 <div class="form-control">
                     <label class="label">

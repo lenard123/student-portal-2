@@ -1,7 +1,6 @@
 <?php $this->layout('layouts::teacher/index') ?>
 <?php $this->start('head') ?>
     <?= view()->lib('axios') ?>
-    <?= view()->js('util') ?>
     <?= view()->js('viewLessons') ?>
 <?php $this->end() ?>
 
@@ -48,7 +47,7 @@
                             </tr>
                         <?php else : ?>
                             <?php foreach ($class->lessons as $lesson) : ?>
-                                <tr x-data="lessonRow(<?= $lesson->id ?>)" x-show="!deleted" x-collapse>
+                                <tr class="relative" x-data="lessonRow(<?= $lesson->id ?>)" x-show="!deleted">
                                     <td><?= $lesson->created_at->diffForHumans() ?></td>
                                     <td><?= $lesson->title ?></td>
                                     <td>
@@ -74,6 +73,8 @@
                                             </a>
 
                                         </div>
+
+                                        <div x-cloak x-show="deleteLesson.isLoading" class="absolute inset-0 bg-black/40 text-white flex items-center justify-center"> Deleting Lesson</div>
                                     </td>
                                 </tr>
                             <?php endforeach ?>

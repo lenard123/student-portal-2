@@ -9,6 +9,11 @@ class View
 {
     private Engine $engine;
     public $stack = [];
+    private $loaded = [
+        'lib' => [],
+        'css' => [],
+        'js' => []
+    ];
 
     private static array $jsLibrary = [
         'alpine' => '<script src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js" defer></script>',
@@ -53,20 +58,38 @@ class View
     }
 
     public function lib($key)
-    {
-        return static::$jsLibrary[$key] . "\n";
+    {        
+        if ($this->load('lib', $key))
+            return static::$jsLibrary[$key] . "\n";
+    }
+
+    public function load($type, $key) {
+        if (in_array($key, $this->loaded[$type]))
+            return false;
+        
+        array_push($this->loaded[$type], $key);
+        return true;
     }
 
     public function css($filename)
     {
         $source = asset('css/' . $filename . '.css');
-        return "<link rel='stylesheet' href='$source'>\n";
+
+        if ($this->load('css', $filename))
+            return "<link rel='stylesheet' href='$source'>\n";
     }
 
     public function js($filename)
     {
         $source = asset('js/' . $filename . '.js');
-        return "<script src='$source'></script>\n";
+
+        if ($this->load('js', $filename))
+            return "<script src='$source'></script>\n";
+    }
+
+    public function data($key, $value)
+    {
+        return "<script>window.$key = ".  json_encode($value) . "</script>\n";
     }
 
 }

@@ -7,7 +7,7 @@ require __DIR__.'/vendor/autoload.php';
 require __DIR__.'/app/__helpers.php';
 
 
-$routes = require('routes.php');
+$routes = require('routes/routes.php');
 $app = App\App::make($routes);
 $app->boot();
 $app->render();

@@ -6,7 +6,7 @@ $isActive = fn ($page) => (
 
 <div class="tabs mt-4">
     <a href="<?= route('teacher/classes/view', $class) ?>" class="tab tab-lifted <?= $isActive('lesson') ?>">Lessons</a>
-    <a class="tab tab-lifted">Classworks</a>
+    <a href="<?= route('teacher/classes/works', $class) ?>" class="tab tab-lifted">Classworks</a>
     <a class="tab tab-lifted">People</a>
     <a class="tab tab-lifted">Files</a>
 </div>

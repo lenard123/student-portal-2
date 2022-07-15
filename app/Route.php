@@ -27,34 +27,34 @@ class Route
         return $route;
     }
 
-    public static function post($path, $action): Route
+    public static function action($method, $path, $action) : Route
     {
         $route = new Route();
         $route->path = $path;
         $route->type = static::TYPE_CALLABLE;
-        $route->method = Request::POST;
+        $route->method = $method;
         $route->action = $action;
-        return $route;
+        return $route;        
+    }
+
+    public static function post($path, $action): Route
+    {
+        return static::action(Request::POST, $path, $action);
     }
 
     public static function put($path, $action): Route
     {
-        $route = new Route();
-        $route->path = $path;
-        $route->type = static::TYPE_CALLABLE;
-        $route->method = Request::PUT;
-        $route->action = $action;
-        return $route;
+        return static::action(Request::PUT, $path, $action);
     }
 
     public static function get($path, $action): Route
     {
-        $route = new Route();
-        $route->path = $path;
-        $route->type = static::TYPE_CALLABLE;
-        $route->method = Request::GET;
-        $route->action = $action;
-        return $route;
+        return static::action(Request::GET, $path, $action);
+    }
+
+    public static function delete($path, $action): Route
+    {
+        return static::action(Request::DELETE, $path, $action);
     }
 
 

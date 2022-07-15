@@ -1,7 +1,7 @@
 document.addEventListener('alpine:init', () => {
 
     const editLessonApi = async function(lessonId, data) {
-        const { data:result } = await axios.put(`?page=api/lesson&lesson=${lessonId}`, data)
+        const { data:result } = await axios.put(`?page=api/lesson&id=${lessonId}`, data)
         return result
     }
 

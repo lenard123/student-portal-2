@@ -17,7 +17,7 @@ class BindModel
 
     public function handle($modelName)
     {
-        $modelId = request()->get($modelName);
+        $modelId = $this->getId($modelName);
         $modelClass = static::$modelMap[$modelName];
 
         $model = $modelClass::findOr($modelId, function () {
@@ -25,6 +25,12 @@ class BindModel
         });
 
         $model->setAsCurrent();
+    }
+
+    private function getId($modelName)
+    {
+        $id = request()->get('id');
+        return request()->get($modelName, $id);
     }
 
     public static function getKey($model)

@@ -6,14 +6,7 @@
 
 <div class="p-8">
 
-    <?= view()->start('components::header', ['title' => $class->name . ' | ' . $class->code]) ?>
-    <a href="<?= route('teacher') ?>" class="btn btn-outline btn-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M11 17l-5-5m0 0l5-5m-5 5h12" />
-        </svg>
-        Back to List of Classes
-    </a>
-    <?= view()->end() ?>
+    <?= $this->insert('components/class_header', ['class' => $class]) ?>
 
     <?= view()->components('class_tab')->render(['active' => 'lesson', 'class' => $class]) ?>
     <div class="bg-white rounded shadow h-full">
@@ -47,11 +40,13 @@
                             </tr>
                         <?php else : ?>
                             <?php foreach ($class->lessons as $lesson) : ?>
-                                <tr class="relative" x-data="lessonRow(<?= $lesson->id ?>)" x-show="!deleted">
+                                <tr  x-data="lessonRow(<?= $lesson->id ?>)" x-show="!deleted">
                                     <td><?= $lesson->created_at->diffForHumans() ?></td>
                                     <th><?= $lesson->title ?></th>
                                     <td>
-                                        <div class="flex gap-2">
+                                        <div x-show="deleteLesson.isLoading" class="px-4">Deleting lesson...</div>
+
+                                        <div x-show="!deleteLesson.isLoading" class="flex gap-2">
 
                                             <a href="<?= route('teacher/classes/view-lesson', $lesson) ?>" class="border border-green-200 bg-green-100 p-2 rounded-full text-green-400 hover:bg-green-400 hover:text-white hover:border-green-400 transition-all">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -73,8 +68,6 @@
                                             </a>
 
                                         </div>
-
-                                        <div x-cloak x-show="deleteLesson.isLoading" class="absolute inset-0 bg-black/40 text-white flex items-center justify-center"> Deleting Lesson</div>
                                     </td>
                                 </tr>
                             <?php endforeach ?>

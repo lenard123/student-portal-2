@@ -33,4 +33,7 @@ return [
     Route::post('api/work', [WorkController::class, 'create'])
         ->middleware('auth:teacher')
         ->middleware('model:class'),
+    Route::delete('api/work', [WorkController::class, 'destroy'])
+        ->middleware('auth:teacher')
+        ->middleware('model:work'),
 ];

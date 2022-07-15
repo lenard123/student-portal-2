@@ -15,6 +15,8 @@ class User extends Model
         'gender'
     ];
 
+    protected $appends = ['fullname'];
+
     public function setPasswordAttribute($password) : void
     {
         $this->attributes['password'] = password_hash($password, PASSWORD_DEFAULT);
@@ -23,5 +25,16 @@ class User extends Model
     public function classes()
     {
         return $this->hasMany(Classes::class, 'teacher_id');
+    }
+
+    public function getAvatarAttribute()
+    {
+        $seed = urlencode($this->firstname);
+        return "https://avatars.dicebear.com/api/initials/{$seed}.svg";
+    }
+
+    public function getFullnameAttribute()
+    {
+        return $this->firstname." ".$this->lastname;
     }
 }

@@ -25,4 +25,9 @@ class WorkController extends BaseController
 
         return $work;
     }
+
+    public function destroy()
+    {
+        return ClassWork::current()->delete();
+    }
 }

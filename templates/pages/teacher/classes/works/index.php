@@ -2,26 +2,22 @@
 
 <?php $this->start('head') ?>
 <?= view()->lib('moment') ?>
+<?= view()->lib('axios') ?>
+<?= view()->js('classWorks') ?>
 <?= view()->data('works', $works) ?>
 <?php $this->end() ?>
 
 
-<div class="p-8">
+<div class="content-container">
 
-    <?= view()->start('components::header', ['title' => $class->name . ' | ' . $class->code]) ?>
-    <a href="<?= route('teacher') ?>" class="btn btn-outline btn-sm">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M11 17l-5-5m0 0l5-5m-5 5h12" />
-        </svg>
-        Back to List of Classes
-    </a>
-    <?= view()->end() ?>
+    <?= $this->insert('components/class_header', ['class' => $class]) ?>
 
 
     <?= view()->components('class_tab')->render(['active' => 'work', 'class' => $class]) ?>
 
 
-    <div class="bg-white rounded shadow h-full" x-data="{works: window.works}">
+    <div class="bg-white rounded shadow h-full" x-data="classWorks(window.works)">
+
         <div class="p-4 border-b border-gray-300 flex justify-between">
             <h4 class="uppercase">List of Classworks</h4>
 
@@ -50,8 +46,8 @@
                         <tr x-show="works.length === 0">
                             <td colspan="4">No Classwork Posted</td>
                         </tr>
-                        <template x-for="work of works">
-                            <tr>
+                        <template x-for="work, i of works" :key="work.id">
+                            <tr x-show="!work.deleted">
                                 <td x-text="moment(work.created_at).fromNow()"></td>
                                 <th x-text="work.title"></th>
                                 <td>
@@ -80,7 +76,7 @@
                                             </svg>
                                         </a>
 
-                                        <a class="border border-red-200 bg-red-100 p-2 rounded-full text-red-400 hover:bg-red-400 hover:text-white hover:border-red-400 transition-all cursor-pointer">
+                                        <a @click="confirmDeleteWork(work.id, i)" class="border border-red-200 bg-red-100 p-2 rounded-full text-red-400 hover:bg-red-400 hover:text-white hover:border-red-400 transition-all cursor-pointer">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                             </svg>

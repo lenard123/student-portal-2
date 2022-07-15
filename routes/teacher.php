@@ -37,5 +37,9 @@ return [
 
     Route::get('teacher/classes/view-work', [TeacherController::class, 'showClassWorkPage'])
         ->middleware('auth:teacher')
-        ->middleware('model:work')
+        ->middleware('model:work'),
+
+    Route::get('teacher/classes/students', [TeacherController::class, 'showStudentsPage'])
+        ->middleware('auth:teacher')
+        ->middleware('model:class'),
 ];

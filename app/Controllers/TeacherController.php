@@ -75,4 +75,16 @@ class TeacherController extends BaseController
         $class = $work->class;
         return view()->page('teacher/classes/works/view-work', compact('class', 'work'));
     }
+
+    #teacher/classes/students
+    public function showStudentsPage()
+    {
+        $class = Classes::current();
+        $students = $class->students;
+
+        return view()->page(
+            'teacher/classes/people/index',
+            compact('class', 'students')
+        );
+    }
 }

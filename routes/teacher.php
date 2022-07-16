@@ -46,4 +46,7 @@ return [
     Route::get('teacher/classes/files', [TeacherController::class, 'showFilesPage'])
         ->middleware('auth:teacher')
         ->middleware('model:class'),
+    Route::get('teacher/classes/upload-file', [TeacherController::class, 'showUploadFilePage'])
+        ->middleware('auth:teacher')
+        ->middleware('model:class'),
 ];

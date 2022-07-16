@@ -39,4 +39,12 @@ class ClassController extends BaseController
             throw new NotFoundException();            
         }
     }
+
+    public function upload()
+    {
+        $class = Classes::current();
+        $files = request()->files('files');
+        $class->uploadFiles($files);
+        return null;
+    }
 }

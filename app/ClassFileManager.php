@@ -11,10 +11,10 @@ class ClassFileManager
 {
     public readonly LocalFilesystemAdapter $fileSystem;
 
-    public function __construct(Classes $class)
+    public function __construct(private Classes $class)
     {
         $this->fileSystem = new LocalFilesystemAdapter(
-            ROOT_DIR . '/storage/classes/' . $class->code . '/'
+            $this->root()
         );
     }
 
@@ -31,6 +31,25 @@ class ClassFileManager
         }
         
         return $files;
+    }
+
+    public function upload($file)
+    {
+        $this->addId($file);
+        $dest = $this->root($file['name']);
+
+        move_uploaded_file($file['tmp_name'], $dest);
+    }
+
+    public function root($path = '')
+    {
+        return ROOT_DIR . '/storage/classes/' . $this->class->code . '/' . $path;
+    }
+
+    public function addId(&$file)
+    {
+        $pathinfo = pathinfo($file['name']);
+        $file['name'] = uniqid($pathinfo['filename'] . '-') .'.'. $pathinfo['extension'];
     }
 
     public function getFile($path) : ClassFile

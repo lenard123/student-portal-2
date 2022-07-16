@@ -54,6 +54,14 @@ class Classes extends Model
         return new ClassFileManager($this);
     }
 
+    public function uploadFiles($files)
+    {
+        $fileManager = $this->fileManager;
+        foreach($files as $file) {
+            $fileManager->upload($file);
+        }
+    }
+
     public static function generateCode()
     {
         return strtoupper(generateRandomString(4) . '-' . generateRandomString(4));

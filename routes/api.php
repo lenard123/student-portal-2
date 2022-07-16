@@ -21,6 +21,9 @@ return [
     Route::get('api/class/file', [ClassController::class, 'download'])
         ->middleware('auth:teacher')
         ->middleware('model:class'),
+    Route::post('api/class/file', [ClassController::class, 'upload'])
+        ->middleware('auth:teacher')
+        ->middleware('model:class'),
 
     Route::post('api/lesson', [LessonController::class, 'create'])
         ->middleware('auth:teacher')

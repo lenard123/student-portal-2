@@ -94,8 +94,18 @@ class TeacherController extends BaseController
         $class = Classes::current();
         $files = $class->files;
         return view()->page(
-            'teacher/classes/files',
+            'teacher/classes/files/index',
             compact('class', 'files')
+        );
+    }
+
+    #teacher/classes/upload-file
+    public function showUploadFilePage()
+    {
+        $class = Classes::current();
+        return view()->page(
+            'teacher/classes/files/upload',
+            compact('class')
         );
     }
 }

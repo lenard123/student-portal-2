@@ -34,6 +34,21 @@ class Request
         return Carbon::make($date);
     }
 
+    public function file($key)
+    {
+        $files = $this->files($key);
+        if (count($files) > 0)
+            return $files[0];
+        return null;
+    }
+
+    public function files($key)
+    {
+        if (is_array($_FILES) && is_array($_FILES[$key]))
+            return $_FILES[$key];
+        return [];
+    }
+
     public function post(string $key = null, $default = null)
     {
         if (is_null($key))
@@ -83,11 +98,23 @@ class Request
     public function boot()
     {
         if ($this->receivedJSON()) {
-
             $request_body = json_decode(file_get_contents("php://input"), TRUE) ?? [];
-
             $_POST = $_POST + $request_body;
+        }
 
+        if (is_array($_FILES)) {
+            foreach($_FILES as $name => $file) {
+                $tmp = array();
+                $n = count($file["name"]);
+                for($i = 0; $i < $n; $i++)
+                {
+                    $tmp[$i] = array();
+                    foreach ($file as $key => $value) {
+                        $tmp[$i][$key] = $value[$i];                        
+                    }
+                } 
+                $_FILES[$name] = $tmp;
+            }
         }
     }
 

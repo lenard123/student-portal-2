@@ -67,6 +67,21 @@
             }
         }))
 
+        Alpine.directive('loading', (el, {expression}, { effect, evaluateLater }) => {
+            
+            const getIsLoading = evaluateLater(expression)
+
+            effect(() => {
+                getIsLoading((isLoading) => {
+                    if (isLoading) {
+                        el.classList.add('loading')
+                    } else {
+                        el.classList.remove('loading')
+                    }
+                })
+            })
+            
+        })
     })
 
 })()

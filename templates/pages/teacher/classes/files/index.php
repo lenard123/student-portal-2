@@ -17,7 +17,7 @@
         <div class="p-4 border-b border-gray-300 flex justify-between">
             <h4 class="uppercase">Class Files</h4>
 
-            <a href="<?= route('teacher/classes/create-work', $class) ?>" class="btn btn-sm btn-primary">
+            <a href="<?= route('teacher/classes/upload-file', $class) ?>" class="btn btn-sm btn-primary">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                 </svg>
@@ -26,6 +26,7 @@
         </div>
 
         <div class="p-4" x-data="{files: window.files}">
+
             <div class="overflow-x-auto">
                 <table class="table w-full">
 
@@ -38,7 +39,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <template x-for="file in files" :key="file.path">
+                        <template x-if="files.length === 0">
+                            <tr>
+                                <td colspan="4">No files added</td>
+                            </tr>
+                        </template>
+                        <template x-for="file in files" :key="file.name">
                             <tr>
                                 <td class="flex items-center gap-1">
                                     <span class="text-primary">

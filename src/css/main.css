@@ -104,3 +104,8 @@ div.admin-menu > a.active {
 .content-container {
   @apply p-8;
 }
+
+.dropdown.dropdown-close .dropdown-content {
+  visibility:hidden !important;
+  opacity:0 !important;
+}

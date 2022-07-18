@@ -120,7 +120,7 @@ class Response
 
     public static function make($result): Response
     {
-        if (is_subclass_of($result, Response::class)) {
+        if (is_a($result, Response::class)) {
             return $result;
         }
 

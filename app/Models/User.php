@@ -17,6 +17,10 @@ class User extends Model
 
     protected $appends = ['fullname'];
 
+    protected $hidden = [
+        'password'
+    ];
+
     public function setPasswordAttribute($password) : void
     {
         $this->attributes['password'] = password_hash($password, PASSWORD_DEFAULT);

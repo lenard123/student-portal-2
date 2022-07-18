@@ -3,7 +3,9 @@
 use App\App;
 use App\Auth;
 use App\Middlewares\BindModel;
+use App\Models\User;
 use App\Request;
+use App\Response;
 use App\Session;
 use App\View;
 
@@ -20,6 +22,11 @@ function request() : Request
 function auth() : Auth
 {
     return app()->auth;
+}
+
+function user() : User
+{
+    return auth()->user();
 }
 
 function session() : Session
@@ -56,6 +63,11 @@ function route($path, ...$params)
         }
     }
     return url('?page=' . $path . $query);
+}
+
+function redirect($path, ...$params) : Response
+{
+    return Response::redirect(route($path, ...$params));
 }
 
 function asset($file = null)

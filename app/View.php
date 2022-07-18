@@ -72,9 +72,9 @@ class View
         return true;
     }
 
-    public function css($filename)
+    public function css($filename, $version = '1.0')
     {
-        $source = asset('css/' . $filename . '.css');
+        $source = asset('css/' . $filename . '.css?v='.$version);
 
         if ($this->load('css', $filename))
             return "<link rel='stylesheet' href='$source'>\n";

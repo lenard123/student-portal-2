@@ -44,7 +44,7 @@ class Auth
         if (is_null($user))
             throw new UnauthenticatedException();
 
-        if ($user->role !== $role)
+        if ($role !== null && $user->role !== $role)
             throw new UnauthenticatedException();
 
         $user->setAsCurrent();

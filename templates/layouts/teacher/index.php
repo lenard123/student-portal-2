@@ -9,7 +9,8 @@
     <?= view()->lib('alpine/collapse') ?>
     <?= view()->lib('alpine') ?>
     <?= view()->js('util') ?>
-    <?= view()->css('main') ?>
+    <?= view()->css('main', uniqid()) ?>
+    <?= view()->data('user', user()) ?>
     <?= $this->section('head') ?>
 </head>
 <body class="flex teacher">

@@ -50,6 +50,14 @@ class Auth
         $user->setAsCurrent();
     }
 
+    public function role($chk = null)
+    {
+        if (is_null($chk))
+            return $this->user()->role;
+
+        return $this->user()->role === $chk;
+    }
+
     public function user()
     {
         return User::current();

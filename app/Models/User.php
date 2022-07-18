@@ -31,6 +31,11 @@ class User extends Model
         return $this->hasMany(Classes::class, 'teacher_id');
     }
 
+    public function enrolledClasses()
+    {
+        return $this->belongsToMany(Classes::class, 'class_students', 'student_id', 'class_id');
+    }
+
     public function getAvatarAttribute()
     {
         $seed = urlencode($this->firstname);

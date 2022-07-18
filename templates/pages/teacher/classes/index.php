@@ -1,4 +1,9 @@
 <?php $this->layout('layouts::teacher/index') ?>
+
+<?php $this->start('head') ?>
+    <?= view()->data('classes', $classes) ?>
+<?php $this->end() ?>
+
 <div class="p-8">
     <?= view()->start('components::header', ['title' => 'Clasess']) ?>
         <a href="<?= route('teacher/classes/create') ?>" class="btn btn-outline btn-sm btn-primary">
@@ -29,12 +34,12 @@
                     </div>
                 </div>
             <?php else : ?>
-                <div class="grid grid-cols-4 gap-4 ">
-                    <?php foreach ($classes as $class) : ?>
-                        <?= view()->components('class_card')->render(compact('class')) ?>
-                    <?php endforeach ?>
-                <?php endif ?>
+                <div class="grid grid-cols-4 gap-4" x-data="{classes: window.classes}">
+                    <template x-for="_class in classes">
+                        <?= view()->components('class_card') ?>
+                    </template>
                 </div>
+            <?php endif ?>
         </div>
     </div>
 </div>

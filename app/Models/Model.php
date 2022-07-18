@@ -2,19 +2,23 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Database\Eloquent\Model as BaseModel;
 
 class Model extends BaseModel
 {
-    protected static self $current;
+    protected static $current = [];
 
     public static function current() : self
     {
-        return self::$current;
+        if (array_key_exists(static::class, static::$current))
+            return static::$current[static::class];
+
+        throw new Exception("No model binded in: " . static::class);
     }
 
     public function setAsCurrent()
     {
-        self::$current = $this;
+        static::$current[$this::class] = $this;
     }
 }

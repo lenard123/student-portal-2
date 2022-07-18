@@ -21,6 +21,7 @@ class View
         'axios' => '<script src="https://unpkg.com/axios@0.27.2/dist/axios.min.js"></script>',
         'tinymce' => '<script src="https://cdn.tiny.cloud/1/orquwf4cjw6axvonhne86ri8ndnic5g0cx4bytrfxmz8dm1h/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>',
         'moment' => '<script src="https://momentjs.com/downloads/moment.js"></script>',
+        'flowbite' => '<script src="/node_modules/flowbite/dist/flowbite.js" defer></script>',
     ];
 
     public function __construct()

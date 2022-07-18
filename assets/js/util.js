@@ -22,8 +22,12 @@
     
             data: null,
             errors: null,
+            isLoading: false,
     
             execute: async function (...params) {
+
+                if(this.isLoading) return;
+
                 try {
                     this.isLoading = true
                     this.errors = null
@@ -82,6 +86,33 @@
             })
             
         })
+
+
+        Alpine.data('modal', (id) => ({
+            enabled: false,
+            modalId: id,
+            close() { this.enabled = false },
+            open() { this.enabled = true },
+            toggle() { this.enabled = !this.enabled },
+            set(enabled) { this.enabled = enabled }
+        }))
+
+        Alpine.bind('toggleModal', (id) => ({
+            '@click'() {
+                this.$dispatch('toggleModal', id)
+            }
+        }))
+
+        Alpine.bind('Modal', () => ({
+            '@toggleModal.window'({ detail }) {
+                if (this.modalId === detail) {
+                    this.toggle()
+                }
+            },
+            ':class'() {
+                return this.enabled ? 'flex' : 'hidden'
+            }
+        }))
     })
 
 })()

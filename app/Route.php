@@ -2,8 +2,6 @@
 
 namespace App;
 
-use App\Exceptions\ResponseException;
-
 class Route
 {
 

@@ -4,6 +4,7 @@ namespace App\Controllers\Api;
 
 use App\Controllers\BaseController;
 use App\Exceptions\NotFoundException;
+use App\Exceptions\ValidationException;
 use App\Models\Classes;
 use Exception;
 
@@ -46,5 +47,18 @@ class ClassController extends BaseController
         $files = request()->files('files');
         $class->uploadFiles($files);
         return null;
+    }
+
+    public function join()
+    {
+        $code = request()->code;
+        $class = Classes::where('code', $code)->firstOr(function() {
+            throw new NotFoundException();
+        });
+
+        if (!$class->students()->where('student_id', user()->id)->exists())
+            $class->students()->save(user());
+
+        return $class;
     }
 }

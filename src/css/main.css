@@ -1,29 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
-* {
-  scroll-behavior: smooth;
-}
-
-body {
-    @apply min-h-screen bg-slate-100;
-}
-
+/*Custom Class*/
 .navbar {
     @apply sm:px-8;
-}
-
-table tbody {
-  @apply text-sm;
-}
-
-table td {
-  vertical-align: top;
-}
-
-[x-cloak] {
-  display: none;
 }
 
 div.admin-menu > a {
@@ -43,12 +21,14 @@ div.admin-menu > a.active {
 }
 
 .admin .nav-link,
-.teacher .nav-link {
+.teacher .nav-link,
+.student .nav-link {
   @apply transition-all text-sm flex hover:bg-[#181827] text-[#a2a3b7] hover:text-white py-3 w-full;
 }
 
 .admin .nav-link .icon,
-.teacher .nav-link .icon {
+.teacher .nav-link .icon,
+.student .nav-link .icon {
   @apply inline-flex justify-center items-center w-12 h-5 flex-none ;
 }
 
@@ -108,4 +88,61 @@ div.admin-menu > a.active {
 .dropdown.dropdown-close .dropdown-content {
   visibility:hidden !important;
   opacity:0 !important;
+}
+
+
+.fb-modal {
+  @apply overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full;
+  @apply bg-black/30 justify-center items-center;
+}
+
+.fb-modal .fb-modal-container{
+  @apply relative p-4 w-full max-w-md h-full md:h-auto;
+}
+
+.fb-modal .fb-modal-content{
+  @apply relative bg-white rounded-lg shadow dark:bg-gray-700;
+}
+
+.fb-modal .fb-modal-header{
+  @apply flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600;
+}
+
+.fb-modal .fb-modal-header-title {
+  @apply text-xl font-semibold text-gray-900 dark:text-white;
+}
+
+.fb-modal .fb-modal-body {
+  @apply p-6;
+}
+
+.fb-modal .fb-modal-footer{
+  @apply flex items-center p-6 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600;
+}
+
+/*Tailwind*/
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/*Defaults*/
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+    @apply min-h-screen bg-slate-100;
+}
+
+table tbody {
+  @apply text-sm;
+}
+
+table td {
+  vertical-align: top;
+}
+
+[x-cloak] {
+  display: none;
 }

@@ -18,6 +18,8 @@ return [
 
     Route::post('api/class', [ClassController::class, 'create'])
         ->middleware('auth:teacher'),
+    Route::post('api/class/students', [ClassController::class, 'join'])
+        ->middleware('auth:student'),
     Route::get('api/class/file', [ClassController::class, 'download'])
         ->middleware('auth:teacher')
         ->middleware('model:class'),

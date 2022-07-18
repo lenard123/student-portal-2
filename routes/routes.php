@@ -7,9 +7,10 @@ return [
     Route::view('', 'home'),
     Route::view('login', 'login'),
     Route::view('register', 'register'),
-    Route::post('logout', [AuthController::class, 'logout']),
-        // ->middleware('auth'),
+    Route::post('logout', [AuthController::class, 'logout'])
+        ->middleware('auth'),
 
+    ...require('student.php'),
     ...require('teacher.php'),
     ...require('admin.php'),
     ...require('api.php'),

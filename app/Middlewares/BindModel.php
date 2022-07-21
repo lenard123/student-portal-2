@@ -7,6 +7,7 @@ use App\Models\Classes;
 use App\Models\ClassWork;
 use App\Models\Lesson;
 use App\Models\Model;
+use App\Models\SubmittedClassWork;
 
 class BindModel
 {
@@ -15,6 +16,7 @@ class BindModel
         'class' => Classes::class,
         'lesson' => Lesson::class,
         'work' => ClassWork::class,
+        'submitWork' => SubmittedClassWork::class,
     ];
 
     public function handle($modelName)

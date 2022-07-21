@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\Classes;
 use App\Models\ClassWork;
 use App\Models\Lesson;
+use App\Models\SubmittedClassWork;
 
 class StudentController extends BaseController
 {
@@ -55,7 +56,11 @@ class StudentController extends BaseController
     {
         $work = ClassWork::current();
         $class = $work->class;
-        return view()->page('student/classes/works/view-work', compact('class', 'work'));
+        $submitted = SubmittedClassWork::firstOrCreate([
+            'class_work_id' => $work->id,
+            'student_id' => auth()->id(),
+        ]);
+        return view()->page('student/classes/works/view-work', compact('class', 'work', 'submitted'));
     }
 
     #student/classes/students

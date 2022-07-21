@@ -63,4 +63,9 @@ class Auth
     {
         return User::current();
     }
+
+    public function id()
+    {
+        return $this->user()->id;
+    }
 }

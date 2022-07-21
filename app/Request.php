@@ -11,6 +11,7 @@ class Request
     const POST = 'POST';
     const PUT = 'PUT';
     const DELETE = 'DELETE';
+    const PATCH = 'PATCH';
 
     public function get(string $key = null, $default = null)
     {

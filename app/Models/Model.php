@@ -21,4 +21,13 @@ class Model extends BaseModel
     {
         static::$current[$this::class] = $this;
     }
+
+    protected function castAttribute($key, $value)
+    {
+        if ($this->getCastType($key) == 'array' && is_null($value)) {
+            return [];
+        }
+
+        return parent::castAttribute($key, $value);
+    }
 }

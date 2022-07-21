@@ -41,6 +41,12 @@ return [
     Route::post('api/work', [WorkController::class, 'create'])
         ->middleware('auth:teacher')
         ->middleware('model:class'),
+    Route::patch('api/work', [WorkController::class, 'submit'])
+        ->middleware('auth:student')
+        ->middleware('model:submitWork'),
+    Route::post('api/work/files', [WorkController::class, 'upload'])
+        ->middleware('auth:student')
+        ->middleware('model:work'),
     Route::delete('api/work', [WorkController::class, 'destroy'])
         ->middleware('auth:teacher')
         ->middleware('model:work'),

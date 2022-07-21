@@ -5,6 +5,7 @@ namespace App\Controllers\Api;
 use App\Controllers\BaseController;
 use App\Models\Classes;
 use App\Models\ClassWork;
+use App\Models\SubmittedClassWork;
 
 class WorkController extends BaseController
 {
@@ -24,6 +25,29 @@ class WorkController extends BaseController
         $work->save();
 
         return $work;
+    }
+
+    public function upload()
+    {
+        $work = ClassWork::current();
+        $submittedWork = SubmittedClassWork::firstOrCreate([
+            'class_work_id' => $work->id,
+            'student_id' => auth()->id(),
+        ]);
+        $file = request()->file('file');
+        
+        $uploadedFile = $submittedWork->addAttachment($file);
+
+        return $uploadedFile;
+    }
+
+    public function submit()
+    {
+        $submittedWork = SubmittedClassWork::current();
+        $submittedWork->status = 'submitted';
+        $submittedWork->save();
+
+        return $submittedWork;
     }
 
     public function destroy()

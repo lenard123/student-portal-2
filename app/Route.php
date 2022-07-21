@@ -40,6 +40,11 @@ class Route
         return static::action(Request::POST, $path, $action);
     }
 
+    public static function patch($path, $action): Route
+    {
+        return static::action(Request::PATCH, $path, $action);
+    }
+
     public static function put($path, $action): Route
     {
         return static::action(Request::PUT, $path, $action);

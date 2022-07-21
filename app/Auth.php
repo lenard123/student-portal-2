@@ -36,6 +36,7 @@ class Auth
 
     public function authenticate($role = null)
     {
+        $roles = explode(",", $role);
         if (!session()->has(static::SESSION_KEY))
             throw new UnauthenticatedException();
 
@@ -44,7 +45,7 @@ class Auth
         if (is_null($user))
             throw new UnauthenticatedException();
 
-        if ($role !== null && $user->role !== $role)
+        if ($role !== null && !in_array($user->role, $roles))
             throw new UnauthenticatedException();
 
         $user->setAsCurrent();

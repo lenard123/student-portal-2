@@ -21,7 +21,7 @@ return [
     Route::post('api/class/students', [ClassController::class, 'join'])
         ->middleware('auth:student'),
     Route::get('api/class/file', [ClassController::class, 'download'])
-        ->middleware('auth:teacher')
+        ->middleware('auth:teacher,student')
         ->middleware('model:class'),
     Route::post('api/class/file', [ClassController::class, 'upload'])
         ->middleware('auth:teacher')

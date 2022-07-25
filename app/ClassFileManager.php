@@ -62,6 +62,12 @@ class ClassFileManager
         $file['name'] = uniqid($pathinfo['filename'] . '-') .'.'. $pathinfo['extension'];
     }
 
+    public function delete($fileId)
+    {
+        if (is_file($this->root($fileId)))
+            @unlink($this->root($fileId));
+    }
+
     public function getFile($path) : ClassFile
     {
         $files = $this->getFiles();

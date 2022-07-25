@@ -47,6 +47,12 @@ return [
     Route::post('api/work/files', [WorkController::class, 'upload'])
         ->middleware('auth:student')
         ->middleware('model:work'),
+    Route::get('api/work/files', [WorkController::class, 'download'])
+        ->middleware('auth:student,teacher')
+        ->middleware('model:submitWork'),
+    Route::delete('api/work/files', [WorkController::class, 'removeFile'])
+        ->middleware('auth:student')
+        ->middleware('model:submitWork'),
     Route::delete('api/work', [WorkController::class, 'destroy'])
         ->middleware('auth:teacher')
         ->middleware('model:work'),

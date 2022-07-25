@@ -11,8 +11,8 @@ class ClassFile
 {
 
     public readonly string $name;
-    public readonly Carbon $last_modified;
-    public readonly int $size;
+    public readonly ?Carbon $last_modified;
+    public readonly ?int $size;
     private LocalFilesystemAdapter $handler;
 
     public function __construct(FileAttributes $file, LocalFilesystemAdapter $handler)
@@ -26,5 +26,10 @@ class ClassFile
     public function content()
     {
         return $this->handler->read($this->name);
+    }
+
+    public static function make(string $path, LocalFilesystemAdapter $handler)
+    {
+        return new ClassFile(new FileAttributes($path), $handler);
     }
 }

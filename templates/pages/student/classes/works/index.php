@@ -2,7 +2,9 @@
 
 <?php $this->start('head') ?>
 <?= view()->lib('moment') ?>
+<?= view()->js('classWorks') ?>
 <?= view()->data('works', $works) ?>
+<?= view()->data('submitted', $submitted) ?>
 <?php $this->end() ?>
 
 
@@ -47,7 +49,7 @@
                                     </div>
                                     <div>
                                         <span class="font-semibold">Status: </span>
-                                        <span>Pending</span>
+                                        <span x-text="getStatus(work.id)">Pending</span>
                                     </div>
                                 </td>
                                 <td>

@@ -9,7 +9,20 @@ document.addEventListener('alpine:init', () => {
     }
 
     const submitWorkApi = async (id) => {
-        const { data } = await axios.patch(api('work', {id}))
+        const { data } = await axios.patch(api('work', {id}), {
+            status: 'submitted'
+        })
+        return data
+    }
+
+    const deleteFileApi = async(fileId) => {
+        return await axios.delete(api('work/files', {id: window.submitted.id, fileId}))
+    }
+
+    const unSubmitWorkApi = async (id) => {
+        const { data } = await axios.patch(api('work', {id}), {
+            status: 'pending'
+        })
         return data
     }
 
@@ -18,6 +31,20 @@ document.addEventListener('alpine:init', () => {
         submitted: window.submitted,
 
         files: window.submitted.attachments ?? [],
+
+        async handleRemoveAttachment(file) {
+            const confirmed = window.confirm('Are you sure to remove this file?')
+            if (confirmed) {
+                try {
+                    file.status = 'removing'
+                    await deleteFileApi(file.id)
+                    this.files = this.files.filter(_file => _file.id !== file.id)
+                } catch (e) {
+                    console.log(e)
+                    alert('An error occured while removing the file');
+                }
+            }
+        },
 
         async uploadFile({ target }) {
             const [file] = target.files
@@ -49,16 +76,30 @@ document.addEventListener('alpine:init', () => {
         },
 
         submitWork: useAsync(submitWorkApi),
+        unSubmitWork: useAsync(unSubmitWorkApi),
+
+        isFileLoading(file) {
+            return file.status === 'uploading' || file.status === 'removing';
+        },
 
         handleSubmit() {
             this.submitWork.execute(this.submitted.id)
         },
 
+        handleUnsubmit() {
+            this.unSubmitWork.execute(this.submitted.id)
+        },
+        
+
         init() {
             window.data = this
-            this.submitWork.onSuccess = (data) => {
+
+            const updateData = (data) => {
                 this.submitted = data
             }
+
+            this.submitWork.onSuccess = updateData
+            this.unSubmitWork.onSuccess = updateData
         }
 
     }))

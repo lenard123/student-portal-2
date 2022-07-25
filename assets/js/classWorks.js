@@ -18,6 +18,17 @@ document.addEventListener('alpine:init', () => {
                 this.works[index].deleted = true
                 this.deleteWork.execute(workId)
             }
+        },
+
+        getStatus(id) {
+            const submitted = window.submitted[id]
+
+            if (submitted) {
+                return submitted.status
+            }
+
+            return 'Pending'
+
         }
 
     }))

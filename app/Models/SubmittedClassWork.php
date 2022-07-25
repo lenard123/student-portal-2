@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\ClassFile;
 use App\ClassFileManager;
 use Illuminate\Database\Eloquent\Casts\AsCollection;
 
@@ -20,6 +21,18 @@ class SubmittedClassWork extends Model
     protected $attributes = [
         'status' => 'pending',
     ];
+
+    public function removeAttachment($fileId)
+    {
+        try {
+            $fileManager = $this->class_file_manager;
+            $fileManager->delete($fileId);
+        } catch (\Exception $ex) {}
+
+        $this->attachments = array_filter($this->attachments, fn($attachment) => $attachment['id'] !== $fileId);
+
+        $this->save();
+    }
 
     public function addAttachment($file)
     {
@@ -57,13 +70,27 @@ class SubmittedClassWork extends Model
         return $this->attributes['status'] === 'submitted';
     }
 
+    public function getAttachmentsAttribute()
+    {
+        $fileManager = $this->class_file_manager;
+        $attachments = json_decode($this->attributes['attachments']) ?? [];
+        $result = array_filter($attachments, function($file) use ($fileManager) {
+            return is_file($fileManager->root($file->id));
+        });
+        return $result;
+    }
+
+    public function getFile($fileId)
+    {
+        return ClassFile::make($fileId, $this->class_file_manager->fileSystem);
+    }
+
     public function getStatusAttribute()
     {
         $status = $this->attributes['status'];
 
         if ($status === 'pending') return 'Pending';
-
-        
+       
         return 'Submitted';
     }
 }

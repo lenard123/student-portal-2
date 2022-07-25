@@ -41,10 +41,21 @@ class WorkController extends BaseController
         return $uploadedFile;
     }
 
+    public function download()
+    {
+        $work = SubmittedClassWork::current();
+        $fileId = request()->file;
+        try {
+            return $work->getFile($fileId);
+        } catch (Exception $ex){
+            throw new NotFoundException();            
+        }
+    }
+
     public function submit()
     {
         $submittedWork = SubmittedClassWork::current();
-        $submittedWork->status = 'submitted';
+        $submittedWork->status = request()->status;
         $submittedWork->save();
 
         return $submittedWork;
@@ -53,5 +64,13 @@ class WorkController extends BaseController
     public function destroy()
     {
         return ClassWork::current()->delete();
+    }
+
+    public function removeFile()
+    {
+        $submittedWork = SubmittedClassWork::current();
+        $fileId = request()->fileId;
+        $submittedWork->removeAttachment($fileId);
+        return null;
     }
 }

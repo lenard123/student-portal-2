@@ -31,6 +31,11 @@ class User extends Model
         return $this->hasMany(Classes::class, 'teacher_id');
     }
 
+    public function submitted()
+    {
+        return $this->hasMany(SubmittedClassWork::class, 'student_id');
+    }
+
     public function enrolledClasses()
     {
         return $this->belongsToMany(Classes::class, 'class_students', 'student_id', 'class_id');

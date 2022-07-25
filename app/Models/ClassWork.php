@@ -8,4 +8,14 @@ class ClassWork extends Model
     {
         return $this->belongsTo(Classes::class, 'class_id');
     }
+
+    public function submitted()
+    {
+        return $this->hasMany(SubmittedClassWork::class, 'class_work_id');
+    }
+
+    public function getIsSubmittedAttribute()
+    {
+        return false;
+    }
 }

@@ -55,8 +55,12 @@ class WorkController extends BaseController
     public function submit()
     {
         $submittedWork = SubmittedClassWork::current();
-        $submittedWork->status = request()->status;
-        $submittedWork->save();
+
+        if (request()->has('status'))
+            $submittedWork->update(request()->only('status'));
+        
+        if (request()->has('grade'))
+            $submittedWork->updateQuietly(request()->only('grade'));
 
         return $submittedWork;
     }

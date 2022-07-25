@@ -51,8 +51,8 @@
                 return this.error(key) !== undefined
             },
 
-            onSuccess: (data) => {},
-            onError: (error) => {},
+            onSuccess: console.log,
+            onError: console.log,
         }
     }
 

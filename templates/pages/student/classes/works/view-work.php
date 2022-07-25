@@ -41,6 +41,7 @@
 
             <div>
                 <p>Status: <span x-text="submitted.status"></span></p>
+                <p>Grade: <span x-text="submitted.grade"></span></p>
             </div>
 
             <div class="mt-4 overflow-x-auto">

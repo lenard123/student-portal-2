@@ -51,6 +51,10 @@
                                         <span class="font-semibold">Status: </span>
                                         <span x-text="getStatus(work.id)">Pending</span>
                                     </div>
+                                    <div>
+                                        <span class="font-semibold">Grade: </span>
+                                        <span x-text="getGrade(work.id)"></span>
+                                    </div>
                                 </td>
                                 <td>
                                     <div class="flex gap-2">

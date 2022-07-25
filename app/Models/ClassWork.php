@@ -11,7 +11,7 @@ class ClassWork extends Model
 
     public function submitted()
     {
-        return $this->hasMany(SubmittedClassWork::class, 'class_work_id');
+        return $this->hasMany(SubmittedClassWork::class, 'class_work_id')->where('status', 'submitted');
     }
 
     public function getIsSubmittedAttribute()

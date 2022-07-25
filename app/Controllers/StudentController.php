@@ -45,7 +45,7 @@ class StudentController extends BaseController
     {
         $class = Classes::current();
         $works = $class->works;
-        $submitted = user()->submitted()->select('class_work_id', 'status')->get()->keyBy('class_work_id');
+        $submitted = user()->submitted()->select('class_work_id', 'status', 'grade')->get()->keyBy('class_work_id');
         return view()->page(
             'student/classes/works/index',
             compact('class', 'works', 'submitted')

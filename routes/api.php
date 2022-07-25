@@ -42,7 +42,7 @@ return [
         ->middleware('auth:teacher')
         ->middleware('model:class'),
     Route::patch('api/work', [WorkController::class, 'submit'])
-        ->middleware('auth:student')
+        ->middleware('auth:student,teacher')
         ->middleware('model:submitWork'),
     Route::post('api/work/files', [WorkController::class, 'upload'])
         ->middleware('auth:student')

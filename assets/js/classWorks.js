@@ -28,7 +28,16 @@ document.addEventListener('alpine:init', () => {
             }
 
             return 'Pending'
+        },
 
+        getGrade(id) {
+            const submitted = window.submitted[id]
+
+            if (submitted && submitted.grade) {
+                return submitted.grade
+            }
+
+            return 'Not graded';
         }
 
     }))

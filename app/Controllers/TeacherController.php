@@ -57,7 +57,7 @@ class TeacherController extends BaseController
     public function showClassWorksPage()
     {
         $class = Classes::current();
-        $works = $class->works;
+        $works = $class->works()->withCount('submitted')->get();
         return view()->page('teacher/classes/works/index', compact('class', 'works'));
     }
 
@@ -71,9 +71,13 @@ class TeacherController extends BaseController
     #teacher/classes/view-work
     public function showClassWorkPage()
     {
-        $work = ClassWork::current();
+        $work = ClassWork::current()->load('submitted.student');
         $class = $work->class;
-        return view()->page('teacher/classes/works/view-work', compact('class', 'work'));
+
+        return view()->page(
+            'teacher/classes/works/view-work', 
+            compact('class', 'work')
+        );
     }
 
     #teacher/classes/students

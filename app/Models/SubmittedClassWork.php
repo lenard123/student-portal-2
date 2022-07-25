@@ -10,7 +10,7 @@ class SubmittedClassWork extends Model
 {
     protected $table = 'submitted_class_works';
 
-    protected $fillable = ['class_work_id', 'student_id'];
+    protected $fillable = ['class_work_id', 'student_id', 'status', 'grade'];
 
     protected $casts = [
         'attachments' => 'array'
@@ -21,6 +21,18 @@ class SubmittedClassWork extends Model
     protected $attributes = [
         'status' => 'pending',
     ];
+
+    public function student()
+    {
+        return $this->belongsTo(User::class, 'student_id');
+    }
+
+    public function setGradeAttribute($grade)
+    {
+        if ($grade === '') 
+            $grade = null;
+        $this->attributes['grade'] = $grade;
+    }
 
     public function removeAttachment($fileId)
     {
@@ -73,7 +85,7 @@ class SubmittedClassWork extends Model
     public function getAttachmentsAttribute()
     {
         $fileManager = $this->class_file_manager;
-        $attachments = json_decode($this->attributes['attachments']) ?? [];
+        $attachments = json_decode($this->attributes['attachments'] ?? 'null') ?? [];
         $result = array_filter($attachments, function($file) use ($fileManager) {
             return is_file($fileManager->root($file->id));
         });

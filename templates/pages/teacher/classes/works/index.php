@@ -57,7 +57,7 @@
                                     </div>
                                     <div>
                                         <span class="font-semibold">Submitted: </span>
-                                        <span>0</span>
+                                        <span x-text="work.submitted_count"></span>
                                     </div>
                                 </td>
                                 <td>

@@ -29,6 +29,11 @@ class Request
         return $this->get() + $this->post();
     }
 
+    public function has($key)
+    {
+        return array_key_exists($key, $this->all());
+    }
+
     public function date($key)
     {
         $date = $this->request($key);

@@ -38,15 +38,15 @@ class Auth
     {
         $roles = $role === null ? [] : explode(",", $role);
         if (!session()->has(static::SESSION_KEY))
-            throw new UnauthenticatedException();
+            throw new UnauthenticatedException($role);
 
         $user = User::find(session()->get(static::SESSION_KEY));
 
         if (is_null($user))
-            throw new UnauthenticatedException();
+            throw new UnauthenticatedException($role);
 
         if ($role !== null && !in_array($user->role, $roles))
-            throw new UnauthenticatedException();
+            throw new UnauthenticatedException($role);
 
         $user->setAsCurrent();
     }

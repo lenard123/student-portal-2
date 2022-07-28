@@ -1,11 +1,12 @@
 <?php
 
 use App\Route;
+use App\AdminRoute;
 
 return [
     //ADMIN ROUTES
-    Route::view('admin', 'admin/dashboard')
-        ->middleware('auth:admin'),
+    AdminRoute::view('/', 'admin/dashboard'),
+    AdminRoute::view('/announcements', 'admin/announcements/index'),
     
     Route::view('admin/login', 'admin/login')
 ];

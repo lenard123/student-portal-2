@@ -14,48 +14,49 @@ class Route
     public string $page;
     public array $middlewares = [];
     public $action;
+    public $prefix = '';
 
-    public static function view($path, $page): Route
+    public static function view($path, $page): static
     {
-        $route = new Route();
-        $route->path = $path;
-        $route->type = static::TYPE_VIEW;
-        $route->method = Request::GET;
-        $route->page = $page;
-        return $route;
+        $static = new static();
+        $static->path = $path;
+        $static->type = static::TYPE_VIEW;
+        $static->method = Request::GET;
+        $static->page = $page;
+        return $static;
     }
 
-    public static function action($method, $path, $action) : Route
+    public static function action($method, $path, $action) : static
     {
-        $route = new Route();
-        $route->path = $path;
-        $route->type = static::TYPE_CALLABLE;
-        $route->method = $method;
-        $route->action = $action;
-        return $route;        
+        $static = new static();
+        $static->path = $path;
+        $static->type = static::TYPE_CALLABLE;
+        $static->method = $method;
+        $static->action = $action;
+        return $static;        
     }
 
-    public static function post($path, $action): Route
+    public static function post($path, $action): static
     {
         return static::action(Request::POST, $path, $action);
     }
 
-    public static function patch($path, $action): Route
+    public static function patch($path, $action): static
     {
         return static::action(Request::PATCH, $path, $action);
     }
 
-    public static function put($path, $action): Route
+    public static function put($path, $action): static
     {
         return static::action(Request::PUT, $path, $action);
     }
 
-    public static function get($path, $action): Route
+    public static function get($path, $action): static
     {
         return static::action(Request::GET, $path, $action);
     }
 
-    public static function delete($path, $action): Route
+    public static function delete($path, $action): static
     {
         return static::action(Request::DELETE, $path, $action);
     }
@@ -63,16 +64,25 @@ class Route
 
     public function match(): bool
     {
-        $currentPath = request()->get('page', '');
+        $currentPath = trim(request()->get('page', ''), "/");
         $requestMethod = request()->method();
+        $routePath = $this->getRoutePath();
 
-        if ($currentPath !== $this->path)
+        if ($currentPath !== $routePath)
             return false;
 
         if ($requestMethod !== $this->method)
             return false;
 
         return true;
+    }
+
+    public function getRoutePath()
+    {
+        $prefix = trim($this->prefix, "/");
+        $path = trim($this->path, "/");
+
+        return trim($prefix ."/". $path, "/");
     }
 
     public function middleware(...$middlewares)

@@ -10,6 +10,7 @@
     <?= view()->lib('alpine') ?>
     <?= view()->js('util') ?>
     <?= view()->css('main') ?>
+    <?= view()->data('user', user()) ?>
 </head>
 <body class="flex admin">
 
